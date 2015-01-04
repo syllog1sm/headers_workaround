@@ -20,12 +20,12 @@ setup(
   setup_requires=["headers_workaround"]
 )
 
-  import headers_workaround
-  import sys
+import headers_workaround
+import sys
 
-  include_dir = path.join(sys.prefix, 'include', 'site')
-  if not path.exists(include_dir):
-      os.mkdir(include_dir)
+include_dir = path.join(sys.prefix, 'include', 'site')
+if not path.exists(include_dir):
+  os.mkdir(include_dir)
   headers_workaround.install_headers(include_dir, 'numpy')
 ```
 
