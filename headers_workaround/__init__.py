@@ -30,3 +30,20 @@ def install_headers(package_name, include_dir=None):
             shutil.copy(path.join(src_dir, filename), path.join(dest_dir, filename))
     else:
         shutil.copytree(src_dir, dest_dir)
+
+
+def fix_venv_pypy_include(include_dir=None):
+    """Workaround virtualenv bug for pypy. Virtualenv symlinks the entire include
+    directory, instead of creating its own directory and symlinking the contents.
+    Unlink the link, create own dir, and link the contents within it.
+    """
+    if include_dir is None:
+        include_dir = path.join(sys.prefix, 'include')
+    assert path.exists(include_dir)
+    if path.islink(include_dir):
+        dest_dir = include_dir
+        src_dir = path.realpath(include_dir)
+        os.unlink(dest_dir)
+        os.mkdir(dest_dir)
+        for fn in os.listdir(src_dir):
+            shutil.copytree(path.join(src_dir, fn), path.join(dest_dir, fn))
