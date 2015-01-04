@@ -45,3 +45,7 @@ Here is an example setup.py script, employing my workaround. The headers install
 The package required at setup is "murmurhash". But, I also want that package at run-time (because of course). So, I don't write setup_requires=["murmurhash"], because of Bug 209.  Instead, I write setup_requires=["headers_workaround"]
 
 Below the call to setup, I import the headers_workaround package. This only works *below* the call, due to whatever witchcraft setuptools uses to make setup_requires work. I then fetch the location of the relevant Python install, which under a virtualenv will be the virtualenv directory.  I then construct a path to the include dir, and tell headers_workaround to install the murmurhash headers.
+
+# Gotchas
+
+Note that setuptools.setup_requires leaves the .egg directories sitting in your package directory.  This can make your build stateful.  For instance, if you've been trying to require numpy at setup time, you may have a numpy .egg file in your package dir, which is causing "import numpy" to succeed. Delete this directory to make the headers_workaround succeed.
