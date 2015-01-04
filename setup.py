@@ -6,12 +6,12 @@ from setuptools import setup
 setup(
     name="headers_workaround",
     packages=["headers_workaround"],
-    version="0.1",
+    version="0.14",
     author="Matthew Honnibal",
     author_email="honnibal@gmail.com",
     url="http://github.com/syllog1sm/headers_workaround",
-    package_data={"": ["*.h", "numpy/*.h"]},
-    description="""Add this to setup_requires, and use it to fetch headers.""",
+    package_data={"": ["murmurhash/*.h", "numpy/*.h"]},
+    description="""Add this to setup_requires, and use it to install headers.""",
     classifiers=[
                 'Environment :: Console',
                 'Operating System :: OS Independent',
@@ -19,5 +19,3 @@ setup(
                 'Programming Language :: Cython',
                 'Topic :: Scientific/Engineering'],
 )
-
-
