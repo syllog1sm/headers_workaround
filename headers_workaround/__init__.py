@@ -47,4 +47,7 @@ def fix_venv_pypy_include(include_dir=None):
         os.unlink(dest_dir)
         os.mkdir(dest_dir)
         for fn in os.listdir(src_dir):
-            shutil.copytree(path.join(src_dir, fn), path.join(dest_dir, fn))
+            if path.isdir(path.join(src_dir, fn)):
+                shutil.copytree(path.join(src_dir, fn), path.join(dest_dir, fn))
+            else:
+                shutil.copy(path.join(src_dir, fn), path.join(dest_dir, fn))
