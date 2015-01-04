@@ -3,6 +3,13 @@ headers_workaround
 
 Workaround for setuptools Issue #209: packages listed in both setup\_requires and install_requires aren't installed. For PyPy-in-a-virtualenv, this is currently broken due to issue #510 in virtualenv: https://github.com/pypa/virtualenv/issues/510 . I should have a workaround for this soon.
 
+Currently supported headers:
+
+* numpy
+* murmurhash
+
+Pull requests for whatever headers you need are welcome.
+
 Let's say you've developed a C extension that depends on the numpy headers at compile time. This is very common for Cython projects, because numpy is often used as a native array type.
 
 numpy exports a function numpy.get_include_dir(). To call this function, numpy must be imported during the setup.py script. The documented way to achieve this is to supply the string "numpy" to the setup_requires keyword argument of the call to setuptools.setup in your setup.py file.
