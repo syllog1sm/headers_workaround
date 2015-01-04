@@ -10,6 +10,27 @@ Currently supported headers:
 
 Pull requests for whatever headers you need are welcome.
 
+# Usage at-a-glance
+
+```python
+
+setup(
+  ...
+  install_requires=["numpy"],
+  setup_requires=["headers_workaround"]
+)
+
+  import headers_workaround
+  import sys
+
+  include_dir = path.join(sys.prefix, 'include', 'site')
+  if not path.exists(include_dir):
+      os.mkdir(include_dir)
+  headers_workaround.install_headers(include_dir, 'numpy')
+```
+
+# Detailed description
+
 Let's say you've developed a C extension that depends on the numpy headers at compile time. This is very common for Cython projects, because numpy is often used as a native array type.
 
 numpy exports a function numpy.get_include_dir(). To call this function, numpy must be imported during the setup.py script. The documented way to achieve this is to supply the string "numpy" to the setup_requires keyword argument of the call to setuptools.setup in your setup.py file.
