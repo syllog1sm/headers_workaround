@@ -30,7 +30,7 @@ def headers_dir():
 
 
 def test_numpy(headers_dir):
-    headers_workaround.install_headers(headers_dir, 'numpy')
+    headers_workaround.install_headers('numpy', include_dir=headers_dir)
     assert dir_exists(headers_dir)
     assert dir_exists(path.join(headers_dir, 'numpy'))
     # Test some arbitrary files --- if any break, add them to the test later...
@@ -40,7 +40,7 @@ def test_numpy(headers_dir):
 
 
 def test_murmurhash(headers_dir):
-    headers_workaround.install_headers(headers_dir, 'murmurhash')
+    headers_workaround.install_headers('murmurhash', include_dir=headers_dir)
     assert dir_exists(headers_dir)
     assert dir_exists(path.join(headers_dir, 'murmurhash'))
     assert file_exists(path.join(headers_dir, 'murmurhash', 'MurmurHash2.h'))
