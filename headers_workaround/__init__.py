@@ -1,6 +1,7 @@
 from os import path
 import os
 import shutil
+import sys
 
 
 def _local_path(name):
