@@ -23,6 +23,7 @@ def install_headers(package_name, include_dir=None):
     if include_dir is None:
         include_dir = path.join(sys.prefix, 'include')
     assert path.exists(include_dir) and path.isdir(include_dir)
+    assert not path.islink(include_dir)
     src_dir = _local_path(package_name)
     dest_dir = path.join(include_dir, package_name)
     if path.exists(dest_dir):
