@@ -6,7 +6,7 @@ from setuptools import setup
 setup(
     name="headers_workaround",
     packages=["headers_workaround"],
-    version="0.14",
+    version="0.15",
     author="Matthew Honnibal",
     author_email="honnibal@gmail.com",
     url="http://github.com/syllog1sm/headers_workaround",
