@@ -1,4 +1,5 @@
 from os import path
+import os
 import shutil
 
 
@@ -6,26 +7,20 @@ def _local_path(name):
     return path.join(path.dirname(__file__), name)
 
 
-def install_headers(include_dir, package_name):
+def install_headers(package_name, include_dir=None):
     """Install the headers of a known package_name into include_dir. Known
     package names are ['murmurhash', 'numpy'].
 
-    >>> from os import path
-    >>> my_include_dir = 'myenv/include/site'
-    >>> path.exists(path.join(my_include_dir, 'numpy')) 
-    False
-    >>> install_headers(my_include_dir, 'numpy')
-    >>> assert path.exists(path.join(my_include_dir, 'numpy')) # Dir created if not exists
-    >>> assert path.isdir(path.join(my_include_dir, 'numpy'))
-    >>> assert path.exists(path.join(my_include_dir, 'numpy', 'ndarray.h'))
+    include_dir defaults to path.join(sys.prefix, 'include'):
 
-    If instead:
+    >>> install_headers('numpy')
+    >>> assert path.exists(path.join(sys.prefix, 'include', 'numpy', 'ndarray.h'))
 
-    >>> path.exists(path.join(my_include_dir, 'numpy'))
-    True
-
-    install_headers will add any missing headers to the destination dir.
+    If path.join(include_dir, package_name) exists, install_headers will look
+    for any headers that are missing, and add them.
     """
+    if include_dir is None:
+        include_dir = path.join(sys.prefix, 'include')
     assert path.exists(include_dir) and path.isdir(include_dir)
     src_dir = _local_path(package_name)
     dest_dir = path.join(include_dir, package_name)
